@@ -7142,7 +7142,8 @@ var AdminComponent = /** @class */ (function () {
         //   {data : [180, 160, 70, 40, 120, 90], label : 'Non Bilable'}
         //   // {data : [20, 70, 140, 100, 160, 180], label : 'Leave'}
         // ];    
-        this.url = 'http://localhost:3000/';
+        this.url = 'https://my-json-server.typicode.com/ninjaxori/database2/';
+        this.url1 = 'https://my-json-server.typicode.com/ninjaxori/database3/';
         this.options = [
             new _models_teams__WEBPACK_IMPORTED_MODULE_3__["Teams"]("Dev", 'KPMG Dev'),
             new _models_teams__WEBPACK_IMPORTED_MODULE_3__["Teams"]("QA", 'KPMG QA'),
@@ -7160,7 +7161,7 @@ var AdminComponent = /** @class */ (function () {
     };
     AdminComponent.prototype.loadnonbillable = function () {
         var _this = this;
-        this.httpService.get(this.url + this.optionSelected + 'nb').subscribe(function (data) {
+        this.httpService.get(this.url1 + this.optionSelected + 'nb').subscribe(function (data) {
             _this.chartData = data;
         }); //option value will be sent as event
         console.log(this.url + this.optionSelected + 'nb');
@@ -7478,7 +7479,7 @@ var HomeComponent = /** @class */ (function () {
         this.authenticationService = authenticationService;
         this.httpService = httpService;
         this.spinner = spinner;
-        this.url = 'http://localhost:3000/';
+        this.url = 'https://my-json-server.typicode.com/ninjaxori/database1/';
         //  public pieChartLebels = ['Daily task', 'Meetings', 'Trainings', 'Leaves'];
         //  public pieChartData = [120, 150,180,50];
         this.pieChartType = 'pie';
@@ -7674,7 +7675,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2plY3QvcHJvamVjdC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9wcm9qZWN0L3Byb2plY3QuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -7779,7 +7780,7 @@ var ProjectComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc3Bvb29sL3Jlc3Bvb29sLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9yZXNwb29vbC9yZXNwb29vbC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -7884,7 +7885,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\hackathon\hackathon_new\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! e:\hackathon\hackathon_new\src\main.ts */"./src/main.ts");
 
 
 /***/ })
