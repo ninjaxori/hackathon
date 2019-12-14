@@ -7071,7 +7071,7 @@ var UserService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div>\n                <div class=\"dropdown\">\n\n                               <label>Please Select a Team</label>\n                               &nbsp;\n                                <select    required [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>\n                                                      <option class='option' *ngFor='let option of options'   [value]=\"option.id\">{{option.name}}</option>\n                                               </select>\n                                <div>\n                                \n                                </div>\n                </div>\n                                  \n</div>  \n<div>\n</div>\n                              <div>\n\n                                                <canvas\n                                                    baseChart\n                                                    [chartType]=\"'bar'\"\n                                                    [datasets]=\"chartData\"\n                                                    [labels]=\"labels\"\n                                                    [options]=\"chartOptions\"\n                                                    [legend]=\"true\"\n                                                    [colors]=\"colors\">\n                                                </canvas>\n                                </div>\n<p></p>\n<p></p>\n                                <button class=\"btn btn-primary btn-md\"(click)=\"loadnonbillable();\">Non-Billable</button>\n                                &nbsp;\n                                <button class=\"btn btn-secondary btn-md\" (click)=\"loadbillable();\">Billable</button>\n\n                                     \n                "
+module.exports = "\n<div>\n                <div class=\"dropdown\">\n\n                               <label>Please Select a Team</label>\n                               &nbsp;\n                                <select    required [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>\n                                                      <option class='option' *ngFor='let option of options'   [value]=\"option.id\">{{option.name}}</option>\n                                               </select>\n                                <div>\n                                \n                                </div>\n                </div>\n                                  \n</div>  \n<div>\n</div>\n<ngx-spinner\n  \nbdColor=\"rgba(51,51,51,0.8)\"\nsize=\"medium\"\ncolor=\"#fff\"\ntype=\"ball-scale-multiple\">\n\n<p style=\"font-size: 20px; color: white\">Loading...</p>\n</ngx-spinner>\n                              <div>\n\n                                                <canvas\n                                                    baseChart\n                                                    [chartType]=\"'bar'\"\n                                                    [datasets]=\"chartData\"\n                                                    [labels]=\"labels\"\n                                                    [options]=\"chartOptions\"\n                                                    [legend]=\"true\"\n                                                    [colors]=\"colors\">\n                                                </canvas>\n                                </div>\n<p></p>\n<p></p>\n                                <button class=\"btn btn-primary btn-md\"(click)=\"loadnonbillable();\">Non-Billable</button>\n                                &nbsp;\n                                <button class=\"btn btn-secondary btn-md\" (click)=\"loadbillable();\">Billable</button>\n\n                                     \n                "
 
 /***/ }),
 
@@ -7089,7 +7089,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _models_teams__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_models/teams */ "./src/app/_models/teams.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_services */ "./src/app/_services/index.ts");
+/* harmony import */ var ngx_spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-spinner */ "./node_modules/ngx-spinner/fesm5/ngx-spinner.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../_services */ "./src/app/_services/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7103,13 +7104,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 ;
 
 var AdminComponent = /** @class */ (function () {
-    function AdminComponent(userService, authenticationService, httpService) {
+    function AdminComponent(userService, authenticationService, httpService, spinner) {
         this.userService = userService;
         this.authenticationService = authenticationService;
         this.httpService = httpService;
+        this.spinner = spinner;
         this.users = [];
         this.chartOptions = {
             responsive: true // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -7153,6 +7156,11 @@ var AdminComponent = /** @class */ (function () {
     }
     AdminComponent.prototype.onOptionsSelected = function (event) {
         var _this = this;
+        this.spinner.show();
+        setTimeout(function () {
+            /** spinner ends after 5 seconds */
+            _this.spinner.hide();
+        }, 3000);
         var a = event;
         console.log(event);
         this.httpService.get(this.url + event).subscribe(function (data) {
@@ -7161,6 +7169,11 @@ var AdminComponent = /** @class */ (function () {
     };
     AdminComponent.prototype.loadnonbillable = function () {
         var _this = this;
+        this.spinner.show();
+        setTimeout(function () {
+            /** spinner ends after 5 seconds */
+            _this.spinner.hide();
+        }, 3000);
         this.httpService.get(this.url1 + this.optionSelected + 'nb').subscribe(function (data) {
             _this.chartData = data;
         }); //option value will be sent as event
@@ -7168,6 +7181,11 @@ var AdminComponent = /** @class */ (function () {
     };
     AdminComponent.prototype.loadbillable = function () {
         var _this = this;
+        this.spinner.show();
+        setTimeout(function () {
+            /** spinner ends after 5 seconds */
+            _this.spinner.hide();
+        }, 3000);
         this.httpService.get(this.url + this.optionSelected).subscribe(function (data) {
             _this.chartData = data;
         }); //option value will be sent as event
@@ -7186,9 +7204,10 @@ var AdminComponent = /** @class */ (function () {
     };
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({ template: __webpack_require__(/*! ./admin.component.html */ "./src/app/admin/admin.component.html") }),
-        __metadata("design:paramtypes", [_services__WEBPACK_IMPORTED_MODULE_4__["UserService"],
-            _services__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        __metadata("design:paramtypes", [_services__WEBPACK_IMPORTED_MODULE_5__["UserService"],
+            _services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            ngx_spinner__WEBPACK_IMPORTED_MODULE_4__["NgxSpinnerService"]])
     ], AdminComponent);
     return AdminComponent;
 }());
@@ -7221,7 +7240,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- nav -->\n<!-- <nav  class=\"navbar navbar-expand navbar-dark bg-dark\" *ngIf=\"currentUser\">\n    <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link\" routerLink=\"/\">My Utilization</a>\n        <a class=\"nav-item nav-link\" routerLink=\"/project\">My Projects</a>\n        <a class=\"nav-item nav-link\" routerLink=\"/admin\" *ngIf=\"isAdmin\">My Team</a>\n        <a class=\"nav-item nav-link\" (click)=\"logout()\">Logout</a>\n    </div>\n</nav> -->\n<div id=\"app\" class=\"container\">\n    <div>\n    <nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\" *ngIf=\"currentUser\">\n            <a class=\"logo\" href=\"http://www.xoriant.com/\" shape=\"rect\">\n                <img src=\"https://i.ibb.co/q0PB3Wf/logo.png\" alt=\"logo\" >\n            </a>\n               \n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n        </button>\n        <div id=\"navbarNavDropdown\" class=\"navbar-collapse collapse\">\n            <ul class=\"navbar-nav mr-auto\">\n\n            </ul>\n            <ul class=\"navbar-nav\">\n                <li>\n                    <a class=\"nav-item nav-link\" routerLink=\"/\">My Utilization</a>\n    </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/project\">My Projects</a>\n                </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/admin\" *ngIf=\"isAdmin\">My Team</a>\n                </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/respool\" *ngIf=\"isAdmin\">Resource Pool</a>\n                </li>\n                \n                <li class=\"nav-item\">\n               \n                    <a style=\"text-align: right;\" class=\"nav-link active\" href=\"#\"> <i class=\"fa fa-user\" aria-hidden=\"true\"></i> {{currentUser.firstName}}</a>\n                  </li>\n            \n            </ul>\n       \n        </div>\n        \n       \n    </nav>\n    <nav class=\"navbar navbar-expand-md fixed-top-md justify-content-end flex-nowrap bg-dark navbar-dark\">\n    <ul class=\"navbar-nav flex-row\">\n          \n            <li class=\"nav-item\">\n                <a class=\"nav-item nav-link\" (click)=\"logout()\">Logout</a>\n            </li>\n    </ul>\n    </nav>\n    <p>\n        \n    </p>\n    <p></p>\n   \n    <p></p>\n    <p></p>\n    <p></p>\n    <div>\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-6 offset-md-3\">\n                    <router-outlet></router-outlet>\n                </div>\n            </div>\n        </div>\n    </div>\n</div> \n<!-- main app container -->\n\n"
+module.exports = "<!-- nav -->\n<!-- <nav  class=\"navbar navbar-expand navbar-dark bg-dark\" *ngIf=\"currentUser\">\n    <div class=\"navbar-nav\">\n        <a class=\"nav-item nav-link\" routerLink=\"/\">My Utilization</a>\n        <a class=\"nav-item nav-link\" routerLink=\"/project\">My Projects</a>\n        <a class=\"nav-item nav-link\" routerLink=\"/admin\" *ngIf=\"isAdmin\">My Team</a>\n        <a class=\"nav-item nav-link\" (click)=\"logout()\">Logout</a>\n    </div>\n</nav> -->\n<div id=\"app\" class=\"container\">\n    <div>\n    <nav class=\"navbar navbar-expand-md navbar-dark bg-dark\" *ngIf=\"currentUser\">\n            <a class=\"logo\" href=\"http://www.xoriant.com/\" shape=\"rect\">\n                <img src=\"https://i.ibb.co/q0PB3Wf/logo.png\" alt=\"logo\" >\n            </a>\n               \n        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n            <span class=\"navbar-toggler-icon\"></span>\n        </button>\n        <div id=\"navbarNavDropdown\" class=\"navbar-collapse collapse\">\n            <ul class=\"navbar-nav mr-auto\">\n\n            </ul>\n            <ul class=\"navbar-nav\">\n                <li>\n                    <a class=\"nav-item nav-link\" routerLink=\"/\">Utilization</a>\n    </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/project\">Projects</a>\n                </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/admin\" *ngIf=\"isAdmin\">Team</a>\n                </li>\n                <li class=\"nav-item\">\n                    <a class=\"nav-item nav-link\" routerLink=\"/respool\" *ngIf=\"isAdmin\">Resource Pool</a>\n                </li>\n                \n                <li class=\"nav-item\">\n               \n                    <a style=\"text-align: right;\" class=\"nav-link active\" href=\"#\"> <i class=\"fa fa-user\" aria-hidden=\"true\"></i> {{currentUser.firstName}}</a>\n                  </li>\n                    <button class=\"btn btn-secondary btn-sm\" (click)=\"logout()\">Logout</button>\n            \n            </ul>\n       \n        </div>\n        \n       \n    </nav>\n    <p>\n        \n    </p>\n    <p></p>\n   \n    <p></p>\n    <p></p>\n    <p></p>\n    <div>\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-6 offset-md-3\">\n                    <router-outlet></router-outlet>\n                </div>\n            </div>\n        </div>\n    </div>\n</div> \n<!-- main app container -->\n\n"
 
 /***/ }),
 
@@ -7675,7 +7694,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9wcm9qZWN0L3Byb2plY3QuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2plY3QvcHJvamVjdC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -7780,7 +7799,7 @@ var ProjectComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9yZXNwb29vbC9yZXNwb29vbC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc3Bvb29sL3Jlc3Bvb29sLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -7885,7 +7904,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! e:\hackathon\hackathon_new\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! E:\hackathon\hackathon_new\src\main.ts */"./src/main.ts");
 
 
 /***/ })
